@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">	
+
+	<Button
+		android:layout_width="wrap_content"
+		android:id="@+id/multMin"
+		android:text="min"/> 
+		
+	<Button
+		android:layout_width="wrap_content"
+		android:id="@+id/multMinus"
+		android:text="-1"/>
+	<SeekBar
+		android:layout_width="wrap_content"
+		android:id="@+id/multiplier"
+		/>
+	<Button
+		android:layout_width="wrap_content"
+		android:id="@+id/multPlus"
+		android:text=">"/>
+	<Button
+		android:layout_width="wrap_content"
+		android:id="@+id/multMax"
+		android:text=">>"/>
+    
+</LinearLayout>

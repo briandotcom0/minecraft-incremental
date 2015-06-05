@@ -1,0 +1,63 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+	android:columnCount="7">
+    
+	<null/>
+	<Button
+		android:id="@+id/lumberHandP"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberWoodP"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberStoneP"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberIronP"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberGoldP"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberDiamondP"
+		android:onClick="onClick"/>
+	
+	<TextView
+		android:text="@string/lumberjacks"/>
+	<TextView
+		android:id="@+id/lumberHandT"/>
+	<TextView
+		android:id="@+id/lumberWoodT"/>
+	<TextView
+		android:id="@+id/lumberStoneT"/>
+	<TextView
+		android:id="@+id/lumberIronT"/>
+	<TextView
+		android:id="@+id/lumberGoldT"/>
+	<TextView
+		android:id="@+id/lumberDiamondT"/>
+	
+	<null/>
+	<Button
+		android:id="@+id/lumberHandM"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberWoodM"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberStoneM"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberIronM"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberGoldM"
+		android:onClick="onClick"/>
+	<Button
+		android:id="@+id/lumberDiamondM"
+		android:onClick="onClick"/>
+	
+	
+</GridLayout>

@@ -1,29 +1,30 @@
 package com.bjj.mic;
 import android.content.*;
 import java.util.*;
+import android.app.*;
 
 public class Game
 {
 	public static final int LENGTH=14;
 	public static final int RES_LENGTH=11;
 	
-	
+	public static final String[] STRINGS={"hands","wood","stone","iron","gold","diaamond"};
 	
 	// --mine
 	// -shovel
-	public static final int DIRT=0;
-	public static final int SAND=1;
-	public static final int CLAY=2;
+	//DIRT=0;
+	//SAND=1;
+	//CLAY=2;
 	// -pik
-	public static final int STONE=3;
-	public static final int IRON=4;
-	public static final int COAL=5;
-	public static final int GOLD=6;
-	public static final int DIAMOND=7;
-	public static final int OBSIDIAN=8;
-	public static final int REDSTONE=9;
+	//STONE=3;
+	//IRON=4;
+	//COAL=5;
+	//GOLD=6;
+	//DIAMOND=7;
+	//OBSIDIAN=8;
+	//REDSTONE=9;
 	// -axe
-	public static final int WOOD=10;
+	//WOOD
 	/*
 	// --food
 	// -hoe
@@ -63,24 +64,34 @@ public class Game
 	FURNACE
 	//redstone auto stuffs
 	*/
-
+	public final double[] mult={.1,.5,1,1.5,2.2,2.5};
+	//per tik fud consumption
+	public final double[] fudCons={.1,.1,.1,.5,.2,.2};
+	public final double foodPer=0.1;
+	//per tik use
+	public final double[] use={.1,.1,.25,.15,.25,.1};
+	public final double woodToolUse=.05;
+	
 	//these carry over resets
 	private int prestige;
 	private int dead;
 	//DR factor for steves
 	
 	//Map<int,float>?
-	private Map<String,Float> res;
-	private Map<String,Float> storage;
+	public Map<String,Float> res;
+	public Map<String,Float> storage;
 	private Map<String,Float> steveInc;
 	private Map<String,Float> autoInc;
-	private Map<String,Float> steveBonus;
-	private Map<String,Float> autoBonus;
+	protected Map<String,Float> steveBonus;
+	protected Map<String,Float> autoBonus;
 	private Map<String,Float> consumption;
 	
 	protected Farm farm;
 	protected Mine mine;
-	//furnaces
+	protected Ranch ranch;
+	protected Kitchen kitchen;
+	protected Redstone structs;
+	
 	
 	public Game()
 	{
@@ -119,16 +130,17 @@ public class Game
 	
 	public void tick()
 	{
+		farm.tik(this);
+		ranch.tik(this);
+		mine.tik(this);
+		kitchen.tik(this);
+		structs.tik(this);
 		resTick();
 	}
 	
 	private void resTick()
 	{
-		for(String i : res.keySet())
-		{//worry about overflow?
-			res.put(i,res.get(i)+steveInc.get(i)*steveBonus.get(i)+autoInc.get(i)*autoBonus.get(i)-consumption.get(i));
-			enforceMax(i);
-		}
+		//anything?
 	}
 	public boolean enforceMax(String r)
 	{
@@ -140,8 +152,9 @@ public class Game
 		return true;
 	}
 	
-	public void save(SharedPreferences prefs)
+	public void save(Activity act)
 	{
+		SharedPreferences prefs=act.getSharedPreferences("RES",0);
 		SharedPreferences.Editor edit = prefs.edit();
 		for(String item : res.keySet())
 		{
@@ -149,9 +162,15 @@ public class Game
 			edit.putFloat(item+"Store", storage.get(item));
 		}
 		edit.apply();
+		farm.save(act.getSharedPreferences("FARM",0));
+		kitchen.save(act.getSharedPreferences("KITCHEN",0));
+		mine.save(act.getSharedPreferences("MINE",0));
+		ranch.save(act.getSharedPreferences("RANCH",0));
+		structs.save(act.getSharedPreferences("REDSTONE",0));
 	}
-	public void load(SharedPreferences prefs)
+	public void load(Activity act)
 	{
+		SharedPreferences prefs=act.getSharedPreferences("RES",0);
 		for(String item : res.keySet())
 		{
 			res.put(item, prefs.getFloat(item,0));
@@ -160,6 +179,11 @@ public class Game
 		//researches
 		//buildings
 		//steves
+		farm.load(act.getSharedPreferences("FARM",0));
+		kitchen.load(act.getSharedPreferences("KITCHEN",0));
+		mine.load(act.getSharedPreferences("MINE",0));
+		ranch.load(act.getSharedPreferences("RANCH",0));
+		structs.load(act.getSharedPreferences("REDSTONE",0));
 	}
 	
 //	protected class resPool  ? no
